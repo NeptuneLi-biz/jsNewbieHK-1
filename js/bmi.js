@@ -86,14 +86,14 @@ function showPage(showPageData) {
     // 改變分頁尺寸與顏色
     var paginationjs = document.querySelector('.paginationjs');
     paginationjs.className += ' paginationjs-theme-yellow paginationjs-big ';
-
 }
 
 // 分頁切換
 function simpleTemplating(showPageData) {
     var str = '';
     for (var i = showPageData.length - 1; i >= showPageData.length - 10; i--) {
-        str += '<li>'
+        checkBmiStatus(showPageData[i].bmi);
+        str += '<li style="border-left: 7px solid ' + textColor +'">'
             + '<div class="box">'
             + '    <p class="h4">' + showPageData[i].status + '</p>'
             + '</div>'
@@ -114,20 +114,16 @@ function simpleTemplating(showPageData) {
             + '</div>'
             + '</li>';
     }
+    // 將本次計算得到的顏色恢復
+    checkBmiStatus(bmi);
 
-    //         checkBmiStatus(data[i].bmi);
-//         list.style.borderLeft = '7px solid' + textColor;
-//         showData.appendChild(list);
-//     }
-//     // 將本次計算得到的顏色恢復
-//     checkBmiStatus(bmi);
     return str;
 }
 
 
 
 // 將資料存進資料庫
-var updateData = function () {
+function updateData () {
     var dt = new Date();
     var today = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
     var str = '';
@@ -145,11 +141,8 @@ var updateData = function () {
 
 
 
-
-
-
 // 判斷BMI狀態
-var checkBmiStatus = function (bmi) {
+function checkBmiStatus (bmi) {
     // if (bmi < 15) {
     //     return '非常嚴重過輕';
     // }
@@ -197,7 +190,7 @@ var checkBmiStatus = function (bmi) {
 }
 
 // 顯示相對應顏色
-var changeColor = function () {
+function changeColor () {
     document.querySelector('#bmiResult').style.color = textColor;
     document.querySelector('#bmiResult').style.border = '6px solid ' + textColor;
     document.querySelector('#bmiResult .loopImg').style.background.color = textColor;
@@ -205,41 +198,7 @@ var changeColor = function () {
 }
 
 // 四捨五入
-var roundDecimal = function (val, precision) {
+function roundDecimal (val, precision) {
     return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
 }
 
-// 顯示BMI紀錄
-// var showData = function () {
-//     var showData = document.querySelector('.showData ul');
-
-//     for (var i = data.length - 1; i >= data.length - 10; i--) {
-//         var list = document.createElement('li');
-//         var str = '';
-//         str = '<div class="box">'
-//             + '    <p class="h4">' + data[i].status + '</p>'
-//             + '</div>'
-//             + '<div class="box">'
-//             + '    <div class="h5">BMI</div>'
-//             + '    <div class="h4">' + data[i].bmi + '</div>'
-//             + ' </div>'
-//             + '<div class="box">'
-//             + '    <div class="h5">weight</div>'
-//             + '    <div class="h4">' + data[i].weight + '</div>'
-//             + ' </div>'
-//             + '<div class="box">'
-//             + '    <div class="h5">height</div>'
-//             + '    <div class="h4">' + data[i].height + '</div>'
-//             + ' </div>'
-//             + '<div class="box">'
-//             + '    <p class="h5">' + data[i].date + '</p>'
-//             + '</div>';
-//         list.innerHTML = str;
-//         checkBmiStatus(data[i].bmi);
-//         list.style.borderLeft = '7px solid' + textColor;
-//         showData.appendChild(list);
-//     }
-//     // 將本次計算得到的顏色恢復
-//     checkBmiStatus(bmi);
-
-// }
