@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI 計算</title>
+    <link rel="stylesheet" href="css/pagination.css">
+    <link rel="stylesheet" href="css/bmi.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC:500,900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <a href="travel.html">旅遊網連結</a>
+            <a href="bmi.html">BMI連結</a>
+        </header>
+        <main>
+            <ul class="inputArea">
+                <li><img src="assets/BMICLogo.png" alt=""></li>
+                <li>
+                    身高 cm
+                    <input type="number" id="height" placeholder="請輸入身高">
+                    體重 kg
+                    <input type="number" id="weight" placeholder="請輸入體重">
+                </li>
+                <li style="width: 123px;">
+                    <a id="calBtn" href="#">看結果</a>
+                    <div id="bmiResult">
+                        <div class="content">
+                            <h4></h4>
+                            <p>BMI</p>
+                        </div>
+                        <div class="loopImg">
+                            <a href="#" id="refreshBtn">
+                                <img src="assets/icons_loop.png" alt="">
+                            </a>
+                        </div>
+                        <p class="bmiStatus">理想</p>
+                    </div>
+
+                </li>
+            </ul>
+            <section class="showData">
+                <h2>BMI紀錄</h2>
+                <ul id="data-container"></ul>
+                <div id="pagination-container"></div>
+            </section>
+        </main>
+        <footer>
+            <img src="assets/BMICLogo.png" alt="">
+        </footer>
+    </div>
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="js/pagination.js"></script>
+    <script src="js/bmi.js"></script>
+</body>
+
+</html>
