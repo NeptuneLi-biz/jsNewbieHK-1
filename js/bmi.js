@@ -4,15 +4,12 @@ var weight = document.getElementById('weight');
 var calBtn = document.getElementById('calBtn');
 var refreshBtn = document.getElementById('refreshBtn');
 var bmiResult = document.getElementById('bmiResult');
+var data = [];
 var bmi = '';
 var bmiStatus = '';
 var textColor = '';
 var rgbaColor = [];
-var a = '';
 
-// 抓取資料
-var data = JSON.parse(localStorage.getItem('bmiList')) || [];
-data.reverse() //順序反轉(反轉元素的排列秩序)
 
 // 計算BMI
 calBtn.addEventListener('click', function (e) {
@@ -26,7 +23,6 @@ calBtn.addEventListener('click', function (e) {
 
     bmi = roundDecimal(weight.value / Math.pow((height.value / 100), 2), 2);
 
-
     // 判斷BMI狀態
     bmiStatus = checkBmiStatus(bmi);
 
@@ -35,15 +31,12 @@ calBtn.addEventListener('click', function (e) {
     bmiResult.style.display = "block";
     document.querySelector('#bmiResult .content h4').innerHTML = bmi;
     document.querySelector('#bmiResult .bmiStatus').innerHTML = bmiStatus;
+    
     // 顯示相對應BMI的顏色
     changeColor();
 
     // 將資料存進資料庫
     updateData();
-
-    // 重新顯示BMI紀錄
-    showBmi();
-
 }, false)
 
 // 重新輸入身高體重
@@ -54,6 +47,10 @@ refreshBtn.addEventListener('click', function (e) {
     weight.value = '';
     calBtn.style.display = "";
     bmiResult.style.display = "none";
+
+    // 重新抓取BMI歷史資料
+    getBmiData();
+    showBmi();
 
 }, false)
 
@@ -70,105 +67,77 @@ refreshBtn.addEventListener('mouseout', function (e) {
     refreshBtn.style.boxShadow = '0 0 rgba(0, 0, 0, 0)';
 }, false)
 
-// 20200220
+// 載入畫面
 $(function () {
-    (function showBmi (name) {
-        var container = $('#pagination-' + name);
+    getBmiData();
+    showBmi();
+})
 
-        var options = {
-            dataSource: data,
-            callback: function (response, pagination) {
-                window.console && console.log(response, pagination);
+// 抓取資料
+function getBmiData() {
+    data = JSON.parse(localStorage.getItem('bmiList')) || [];
+    data.reverse(); //順序反轉(反轉元素的排列秩序)
+}
 
-                var dataHtml = '<ul>';
+// 顯示BMI紀錄
+function showBmi() {
+    var container = $('#pagination-container');
+    var options = {
+        dataSource: data,
+        callback: function (response, pagination) {
+            window.console && console.log(response, pagination);
 
-                $.each(response, function (index, item) {
-                    // 取得顏色
-                    checkBmiStatus(item.bmi);
+            var dataHtml = '<ul>';
 
-                    dataHtml += ''
-                        + '<li style="border-left: 7px solid ' + textColor + '">'
-                        + '<div class="box">'
-                        + '    <p class="h4">' + item.status + '</p>'
-                        + '</div>'
-                        + '<div class="box">'
-                        + '    <div class="h5">BMI</div>'
-                        + '    <div class="h4">' + item.bmi + '</div>'
-                        + ' </div>'
-                        + '<div class="box">'
-                        + '    <div class="h5">weight</div>'
-                        + '    <div class="h4">' + item.weight + '</div>'
-                        + ' </div>'
-                        + '<div class="box">'
-                        + '    <div class="h5">height</div>'
-                        + '    <div class="h4">' + item.height + '</div>'
-                        + ' </div>'
-                        + '<div class="box">'
-                        + '    <p class="h5">' + item.date + '</p>'
-                        + '</div>'
-                        + '</li>';
-                });
-                dataHtml += '</ul>';
+            $.each(response, function (index, item) {
+                // 取得顏色
+                checkBmiStatus(item.bmi);
 
-                // 將本次計算得到的顏色恢復
-                checkBmiStatus(bmi);
+                dataHtml += ''
+                    + '<li style="border-left: 7px solid ' + textColor + '">'
+                    + '<div class="box">'
+                    + '    <p class="h4">' + item.status + '</p>'
+                    + '</div>'
+                    + '<div class="box">'
+                    + '    <div class="h5">BMI</div>'
+                    + '    <div class="h4">' + item.bmi + '</div>'
+                    + ' </div>'
+                    + '<div class="box">'
+                    + '    <div class="h5">weight</div>'
+                    + '    <div class="h4">' + item.weight + '</div>'
+                    + ' </div>'
+                    + '<div class="box">'
+                    + '    <div class="h5">height</div>'
+                    + '    <div class="h4">' + item.height + '</div>'
+                    + ' </div>'
+                    + '<div class="box">'
+                    + '    <p class="h5">' + item.date + '</p>'
+                    + '</div>'
+                    + '</li>';
+            });
+            dataHtml += '</ul>';
 
-                container.prev().html(dataHtml);
-            }
-        };
+            // 將本次計算得到的顏色恢復
+            checkBmiStatus(bmi);
 
+            container.prev().html(dataHtml);
+        }
+    };
 
-        container.addHook('beforeInit', function () {
-            window.console && console.log('beforeInit...');
-        });
-        container.pagination(options);
+    container.addHook('beforeInit', function () {
+        window.console && console.log('beforeInit...');
+    });
+    container.pagination(options);
 
-        container.addHook('beforePageOnClick', function () {
-            window.console && console.log('beforePageOnClick...');
-            //return false
-        });
-    })('container');
+    container.addHook('beforePageOnClick', function () {
+        window.console && console.log('beforePageOnClick...');
+        //return false
+    });
 
     // 改變分頁尺寸與顏色
     var paginationjs = document.querySelector('.paginationjs');
     paginationjs.className += ' paginationjs-theme-yellow paginationjs-big ';
-
-})
-
-
-// 分頁切換
-function simpleTemplating(showPageData) {
-    var str = '';
-    for (var i = showPageData.length - 1; i >= 0; i--) {
-        checkBmiStatus(showPageData[i].bmi);
-        str += '<li style="border-left: 7px solid ' + textColor + '">'
-            + '<div class="box">'
-            + '    <p class="h4">' + showPageData[i].status + '</p>'
-            + '</div>'
-            + '<div class="box">'
-            + '    <div class="h5">BMI</div>'
-            + '    <div class="h4">' + showPageData[i].bmi + '</div>'
-            + ' </div>'
-            + '<div class="box">'
-            + '    <div class="h5">weight</div>'
-            + '    <div class="h4">' + showPageData[i].weight + '</div>'
-            + ' </div>'
-            + '<div class="box">'
-            + '    <div class="h5">height</div>'
-            + '    <div class="h4">' + showPageData[i].height + '</div>'
-            + ' </div>'
-            + '<div class="box">'
-            + '    <p class="h5">' + showPageData[i].date + '</p>'
-            + '</div>'
-            + '</li>';
-    }
-    // 將本次計算得到的顏色恢復
-    checkBmiStatus(bmi);
-
-    return str;
 }
-
-
 
 // 將資料存進資料庫
 function updateData() {
@@ -186,8 +155,6 @@ function updateData() {
     data.push(str);
     localStorage.setItem('bmiList', JSON.stringify(data));
 }
-
-
 
 // 判斷BMI狀態
 function checkBmiStatus(bmi) {
