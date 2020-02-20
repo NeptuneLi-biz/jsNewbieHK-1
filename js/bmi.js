@@ -72,12 +72,24 @@ refreshBtn.addEventListener('mouseout', function (e) {
     refreshBtn.style.boxShadow = '0 0 rgba(0, 0, 0, 0)';
 }, false)
 
+// 20200220
+// $('#demo').pagination({
+//     dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 40],
+//     pageSize: 5,
+//     showGoInput: true,
+//     showGoButton: true,
+//     callback: function (data, pagination) {
+//         // template method of yourself
+//         var html = template(data);
+//         dataContainer.html(html);
+//     }
+// })
+
 
 // 分頁顯示
 function showPage(showPageData) {
     $('#pagination-container').pagination({
         dataSource: showPageData,
-        // dataSource: data,
         callback: function (showPageData, pagination) {
             var html = simpleTemplating(data);
             $('#data-container').html(html);
@@ -88,10 +100,11 @@ function showPage(showPageData) {
     paginationjs.className += ' paginationjs-theme-yellow paginationjs-big ';
 }
 
+
 // 分頁切換
 function simpleTemplating(showPageData) {
     var str = '';
-    for (var i = showPageData.length - 1; i >= showPageData.length - 10; i--) {
+    for (var i = showPageData.length - 1; i >= 0; i--) {
         checkBmiStatus(showPageData[i].bmi);
         str += '<li style="border-left: 7px solid ' + textColor +'">'
             + '<div class="box">'
