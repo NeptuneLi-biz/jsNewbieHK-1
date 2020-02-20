@@ -4,16 +4,15 @@ var weight = document.getElementById('weight');
 var calBtn = document.getElementById('calBtn');
 var refreshBtn = document.getElementById('refreshBtn');
 var bmiResult = document.getElementById('bmiResult');
-var data = JSON.parse(localStorage.getItem('bmiList')) || [];
 var bmi = '';
 var bmiStatus = '';
 var textColor = '';
 var rgbaColor = [];
 var a = '';
 
-// 一開始顯示 BMI 的歷史紀錄
-showPage(data);
-
+// 抓取資料
+var data = JSON.parse(localStorage.getItem('bmiList')) || [];
+data.reverse() //順序反轉(反轉元素的排列秩序)
 
 // 計算BMI
 calBtn.addEventListener('click', function (e) {
@@ -42,9 +41,8 @@ calBtn.addEventListener('click', function (e) {
     // 將資料存進資料庫
     updateData();
 
-    // 顯示BMI紀錄
-    // showData();
-    showPage(data);
+    // 重新顯示BMI紀錄
+    showBmi();
 
 }, false)
 
@@ -73,32 +71,69 @@ refreshBtn.addEventListener('mouseout', function (e) {
 }, false)
 
 // 20200220
-// $('#demo').pagination({
-//     dataSource: [1, 2, 3, 4, 5, 6, 7, ... , 40],
-//     pageSize: 5,
-//     showGoInput: true,
-//     showGoButton: true,
-//     callback: function (data, pagination) {
-//         // template method of yourself
-//         var html = template(data);
-//         dataContainer.html(html);
-//     }
-// })
+$(function () {
+    (function showBmi (name) {
+        var container = $('#pagination-' + name);
+
+        var options = {
+            dataSource: data,
+            callback: function (response, pagination) {
+                window.console && console.log(response, pagination);
+
+                var dataHtml = '<ul>';
+
+                $.each(response, function (index, item) {
+                    // 取得顏色
+                    checkBmiStatus(item.bmi);
+
+                    dataHtml += ''
+                        + '<li style="border-left: 7px solid ' + textColor + '">'
+                        + '<div class="box">'
+                        + '    <p class="h4">' + item.status + '</p>'
+                        + '</div>'
+                        + '<div class="box">'
+                        + '    <div class="h5">BMI</div>'
+                        + '    <div class="h4">' + item.bmi + '</div>'
+                        + ' </div>'
+                        + '<div class="box">'
+                        + '    <div class="h5">weight</div>'
+                        + '    <div class="h4">' + item.weight + '</div>'
+                        + ' </div>'
+                        + '<div class="box">'
+                        + '    <div class="h5">height</div>'
+                        + '    <div class="h4">' + item.height + '</div>'
+                        + ' </div>'
+                        + '<div class="box">'
+                        + '    <p class="h5">' + item.date + '</p>'
+                        + '</div>'
+                        + '</li>';
+                });
+                dataHtml += '</ul>';
+
+                // 將本次計算得到的顏色恢復
+                checkBmiStatus(bmi);
+
+                container.prev().html(dataHtml);
+            }
+        };
 
 
-// 分頁顯示
-function showPage(showPageData) {
-    $('#pagination-container').pagination({
-        dataSource: showPageData,
-        callback: function (showPageData, pagination) {
-            var html = simpleTemplating(data);
-            $('#data-container').html(html);
-        }
-    })
+        container.addHook('beforeInit', function () {
+            window.console && console.log('beforeInit...');
+        });
+        container.pagination(options);
+
+        container.addHook('beforePageOnClick', function () {
+            window.console && console.log('beforePageOnClick...');
+            //return false
+        });
+    })('container');
+
     // 改變分頁尺寸與顏色
     var paginationjs = document.querySelector('.paginationjs');
     paginationjs.className += ' paginationjs-theme-yellow paginationjs-big ';
-}
+
+})
 
 
 // 分頁切換
@@ -106,7 +141,7 @@ function simpleTemplating(showPageData) {
     var str = '';
     for (var i = showPageData.length - 1; i >= 0; i--) {
         checkBmiStatus(showPageData[i].bmi);
-        str += '<li style="border-left: 7px solid ' + textColor +'">'
+        str += '<li style="border-left: 7px solid ' + textColor + '">'
             + '<div class="box">'
             + '    <p class="h4">' + showPageData[i].status + '</p>'
             + '</div>'
@@ -136,7 +171,7 @@ function simpleTemplating(showPageData) {
 
 
 // 將資料存進資料庫
-function updateData () {
+function updateData() {
     var dt = new Date();
     var today = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
     var str = '';
@@ -155,7 +190,7 @@ function updateData () {
 
 
 // 判斷BMI狀態
-function checkBmiStatus (bmi) {
+function checkBmiStatus(bmi) {
     // if (bmi < 15) {
     //     return '非常嚴重過輕';
     // }
@@ -203,7 +238,7 @@ function checkBmiStatus (bmi) {
 }
 
 // 顯示相對應顏色
-function changeColor () {
+function changeColor() {
     document.querySelector('#bmiResult').style.color = textColor;
     document.querySelector('#bmiResult').style.border = '6px solid ' + textColor;
     document.querySelector('#bmiResult .loopImg').style.background.color = textColor;
@@ -211,7 +246,7 @@ function changeColor () {
 }
 
 // 四捨五入
-function roundDecimal (val, precision) {
+function roundDecimal(val, precision) {
     return Math.round(Math.round(val * Math.pow(10, (precision || 0) + 1)) / 10) / Math.pow(10, (precision || 0));
 }
 
