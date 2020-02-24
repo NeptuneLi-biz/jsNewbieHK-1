@@ -31,7 +31,7 @@ calBtn.addEventListener('click', function (e) {
     bmiResult.style.display = "block";
     document.querySelector('#bmiResult .content h4').innerHTML = bmi;
     document.querySelector('#bmiResult .bmiStatus').innerHTML = bmiStatus;
-    
+
     // 顯示相對應BMI的顏色
     changeColor();
 
@@ -76,14 +76,17 @@ $(function () {
 // 抓取資料
 function getBmiData() {
     data = JSON.parse(localStorage.getItem('bmiList')) || [];
-    data.reverse(); //順序反轉(反轉元素的排列秩序)
+
 }
 
 // 顯示BMI紀錄
 function showBmi() {
+    //將顯示結果順序反轉(反轉元素的排列秩序)
+    var data2 = data.slice().reverse();
     var container = $('#pagination-container');
     var options = {
-        dataSource: data,
+        // dataSource: data,
+        dataSource: data2,
         callback: function (response, pagination) {
             window.console && console.log(response, pagination);
 
@@ -152,6 +155,7 @@ function updateData() {
         height: height.value,
         date: today
     }
+    console.log("1"+data);
     data.push(str);
     localStorage.setItem('bmiList', JSON.stringify(data));
 }
