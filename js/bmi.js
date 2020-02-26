@@ -155,7 +155,7 @@ function updateData() {
         height: height.value,
         date: today
     }
-    console.log("1"+data);
+    console.log("1" + data);
     data.push(str);
     localStorage.setItem('bmiList', JSON.stringify(data));
 }

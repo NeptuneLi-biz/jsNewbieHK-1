@@ -1,0 +1,171 @@
+@import "cssReset";
+
+.container {
+  margin: 0 auto;
+  width: 1024px;
+  font-size: 16px;
+  font-family: "Noto Sans TC", sans-serif;
+  font-weight: 100;
+  position: relative;
+
+  header {
+    background-color: lightgray;
+    padding: 20px 10px;
+  }
+
+  .topBg {
+    background-image: url(/assets/Hero.png);
+    width: 1024px;
+    height: 380px;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    h1 {
+      position: absolute;
+      left: 50%;
+      top: 23%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem;
+      color: #ffffff;
+    }
+    #region {
+      position: absolute;
+      left: 50%;
+      top: 70%;
+      transform: translate(-50%, -50%);
+      font-size: 1.125rem;
+      color: black;
+      padding: 12px;
+      width: 452px;
+      background-color: rgba(255, 255, 255, 0.7);
+    }
+  }
+  .hotRegion {
+    margin: 0 auto;
+    width: 800px;
+    height: 112px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    position: absolute;
+    z-index: 100;
+    top: 450px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    h3 {
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin: 20px 0px 10px 15px;
+    }
+    ul {
+      display: flex;
+      justify-content: space-around;
+      li {
+        text-align: center;
+        border-radius: 5px;
+        a {
+          text-decoration: none;
+          color: #ffffff;
+          font-size: 1.25rem;
+          font-weight: 300;
+          line-height: 42px;
+          display: inline-block;
+          width: 130px;
+          height: 42px;
+        }
+      }
+    }
+  }
+
+  .list {
+    padding: 100px 0px;
+    background-color: #f5f5f5;
+    // padding: 10px 0px;
+
+    .divide {
+      margin: 0 auto;
+      width: 80%;
+      height: 2px;
+      background-image: linear-gradient(to right, #559ac8 0%, #559ac8 50%, transparent 50%);
+      background-size: 10px 1px;
+      background-repeat: repeat-x;
+      position: relative;
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        border: 1px solid black;
+      }
+    }
+    ul {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+
+      li {
+        width: 45%;
+        background-color: #ffffff;
+        margin-top: 20px;
+        color: #000;
+        .picture {
+          height: 155px;
+          background-position: center center;
+          background-size: cover;
+          position: relative;
+          color: #fff;
+          .hotSpot {
+            position: absolute;
+            bottom: 7%;
+            left: 5%;
+            font-size: 1.5rem;
+            font-weight: 100;
+          }
+          .location {
+            position: absolute;
+            bottom: 7%;
+            right: 5%;
+            font-weight: 100;
+          }
+        }
+        .info {
+          padding: 10px 20px;
+          font-weight: 300;
+          position: relative;
+          div {
+            background-repeat: no-repeat;
+            min-height: 18px;
+            padding-left: 28px;
+            margin-top: 10px;
+          }
+          .businessHour {
+            background-image: url("/assets/icons_clock.png");
+          }
+          .adress {
+            background-image: url("/assets/icons_pin.png");
+          }
+          .phone {
+            background-image: url("/assets/icons_phone.png");
+
+            // 因為phone圖比較小，所以需要微調讓版型一至
+            margin-left: 3px;
+            padding-left: 25px;
+          }
+          .admissionFree {
+            background-image: url("/assets/icons_tag.png");
+            position: absolute;
+            bottom: 15%;
+            right: 5%;
+          }
+        }
+      }
+      // 如果是奇數，最後一個靠左邊對齊
+      li:last-child:nth-child(2n - 1) {
+        margin-right: 50%;
+      }
+    }
+  }
+}
