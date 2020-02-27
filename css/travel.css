@@ -55,8 +55,18 @@ table {
   .container header {
     background-color: lightgray;
     padding: 20px 10px; }
+    .container header a {
+      text-decoration: none;
+      background-color: lightcoral;
+      color: white;
+      padding: 5px;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-weight: 100; }
+    .container header a:hover {
+      background-color: #f36e6e; }
   .container .topBg {
-    background-image: url(/assets/Hero.png);
+    background-image: url("/assets/Hero.png");
     width: 1024px;
     height: 380px;
     background-position: center center;
@@ -82,6 +92,10 @@ table {
       color: black;
       padding: 12px;
       width: 452px;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: url("/assets/icons_down.png") no-repeat right 10px center transparent;
       background-color: rgba(255, 255, 255, 0.7); }
   .container .hotRegion {
     margin: 0 auto;
@@ -134,17 +148,28 @@ table {
       background-size: 10px 1px;
       background-repeat: repeat-x;
       position: relative; }
-      .container .list .divide img {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-        width: 12px;
-        height: 12px;
+      .container .list .divide .circle {
+        margin: 0 auto;
+        top: -10px;
+        width: 20px;
+        height: 20px;
         border-radius: 50%;
-        border: 1px solid black; }
+        border: 2px solid #559ac8;
+        background-color: #f5f5f5;
+        position: relative; }
+        .container .list .divide .circle .triangle {
+          position: absolute;
+          top: 60%;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          margin: 0 auto;
+          width: 0;
+          height: 0;
+          border-style: solid;
+          border-width: 10px 6px 0 6px;
+          border-color: #559ac8 transparent transparent transparent; }
     .container .list .regionList {
       display: -webkit-box;
       display: -ms-flexbox;
