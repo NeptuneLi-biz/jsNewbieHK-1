@@ -39,6 +39,7 @@
       transform: translate(-50%, -50%);
       font-size: 2.5rem;
       color: #ffffff;
+      font-weight: 300;
     }
     #region {
       position: absolute;
@@ -97,9 +98,8 @@
   }
 
   .list {
-    padding: 100px 0px;
+    padding: 100px 0px 30px 0px;
     background-color: #f5f5f5;
-    // padding: 10px 0px;
 
     .divide {
       margin: 0 auto;
@@ -217,6 +217,22 @@
         display: flex;
         justify-content: center;
       }
+    }
+  }
+
+  footer {
+    background-color: #559AC8;
+    padding-top: 15px;
+    padding-bottom: 10px;
+    font-size: 0.875rem;
+    text-align: center;
+    h3 {
+      color: #ffffff;
+      padding: 8px;
+    }
+    p {
+      color: #FFD366;
+      padding: 8px;
     }
   }
 
