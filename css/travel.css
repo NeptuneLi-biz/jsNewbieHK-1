@@ -145,7 +145,7 @@ table {
         height: 12px;
         border-radius: 50%;
         border: 1px solid black; }
-    .container .list ul {
+    .container .list .regionList {
       display: -webkit-box;
       display: -ms-flexbox;
       display: flex;
@@ -153,49 +153,74 @@ table {
       justify-content: space-around;
       -ms-flex-wrap: wrap;
       flex-wrap: wrap; }
-      .container .list ul li {
+      .container .list .regionList li {
         width: 45%;
         background-color: #ffffff;
         margin-top: 20px;
         color: #000; }
-        .container .list ul li .picture {
+        .container .list .regionList li .picture {
           height: 155px;
           background-position: center center;
           background-size: cover;
           position: relative;
           color: #fff; }
-          .container .list ul li .picture .hotSpot {
+          .container .list .regionList li .picture .hotSpot {
             position: absolute;
             bottom: 7%;
             left: 5%;
             font-size: 1.5rem;
             font-weight: 100; }
-          .container .list ul li .picture .location {
+          .container .list .regionList li .picture .location {
             position: absolute;
             bottom: 7%;
             right: 5%;
             font-weight: 100; }
-        .container .list ul li .info {
+        .container .list .regionList li .info {
           padding: 10px 20px;
           font-weight: 300;
           position: relative; }
-          .container .list ul li .info div {
+          .container .list .regionList li .info div {
             background-repeat: no-repeat;
             min-height: 18px;
             padding-left: 28px;
             margin-top: 10px; }
-          .container .list ul li .info .businessHour {
+          .container .list .regionList li .info .businessHour {
             background-image: url("/assets/icons_clock.png"); }
-          .container .list ul li .info .adress {
+          .container .list .regionList li .info .adress {
             background-image: url("/assets/icons_pin.png"); }
-          .container .list ul li .info .phone {
+          .container .list .regionList li .info .phone {
             background-image: url("/assets/icons_phone.png");
             margin-left: 3px;
             padding-left: 25px; }
-          .container .list ul li .info .admissionFree {
+          .container .list .regionList li .info .admissionFree {
             background-image: url("/assets/icons_tag.png");
             position: absolute;
             bottom: 15%;
             right: 5%; }
-      .container .list ul li:last-child:nth-child(2n - 1) {
+      .container .list .regionList li:last-child:nth-child(2n - 1) {
         margin-right: 50%; }
+  .container .showData h2 {
+    margin-top: 70px;
+    margin-bottom: 30px;
+    font-size: 2.25rem;
+    font-weight: 300;
+    color: #8a82cc;
+    text-align: center; }
+  .container .showData #pagination-container {
+    margin-top: 50px; }
+    .container .showData #pagination-container .paginationjs {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center; }
+  .container .goTop {
+    width: 24px;
+    height: 24px;
+    background: #000;
+    background-image: url("/assets/btn_goTop.png");
+    display: inline-block;
+    position: fixed;
+    right: 14.5%;
+    bottom: 0%; }
