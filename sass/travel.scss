@@ -54,7 +54,7 @@
       // 移除箭頭樣式
       appearance: none;
       // 改變右邊箭頭樣式
-      background: url("/assets/icons_down.png") no-repeat right 10px center transparent;
+      background: url("../assets/icons_down.png") no-repeat right 10px center transparent;
 
       background-color: rgba(255, 255, 255, 0.7);
     }
@@ -175,20 +175,20 @@
             margin-top: 10px;
           }
           .businessHour {
-            background-image: url("/assets/icons_clock.png");
+            background-image: url("../assets/icons_clock.png");
           }
           .adress {
-            background-image: url("/assets/icons_pin.png");
+            background-image: url("../assets/icons_pin.png");
           }
           .phone {
-            background-image: url("/assets/icons_phone.png");
+            background-image: url("../assets/icons_phone.png");
 
             // 因為phone圖比較小，所以需要微調讓版型一至
             margin-left: 3px;
             padding-left: 25px;
           }
           .admissionFree {
-            background-image: url("/assets/icons_tag.png");
+            background-image: url("../assets/icons_tag.png");
             position: absolute;
             bottom: 15%;
             right: 5%;
@@ -240,7 +240,7 @@
     width: 24px;
     height: 24px;
     background: #000;
-    background-image: url("/assets/btn_goTop.png");
+    background-image: url("../assets/btn_goTop.png");
     display: inline-block;
     position: fixed;
     right: 14.5%;

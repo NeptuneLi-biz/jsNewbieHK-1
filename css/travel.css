@@ -96,7 +96,7 @@ table {
       -webkit-appearance: none;
       -moz-appearance: none;
       appearance: none;
-      background: url("/assets/icons_down.png") no-repeat right 10px center transparent;
+      background: url("../assets/icons_down.png") no-repeat right 10px center transparent;
       background-color: rgba(255, 255, 255, 0.7); }
   .container .hotRegion {
     margin: 0 auto;
@@ -211,15 +211,15 @@ table {
             padding-left: 28px;
             margin-top: 10px; }
           .container .list .regionList li .info .businessHour {
-            background-image: url("/assets/icons_clock.png"); }
+            background-image: url("../assets/icons_clock.png"); }
           .container .list .regionList li .info .adress {
-            background-image: url("/assets/icons_pin.png"); }
+            background-image: url("../assets/icons_pin.png"); }
           .container .list .regionList li .info .phone {
-            background-image: url("/assets/icons_phone.png");
+            background-image: url("../assets/icons_phone.png");
             margin-left: 3px;
             padding-left: 25px; }
           .container .list .regionList li .info .admissionFree {
-            background-image: url("/assets/icons_tag.png");
+            background-image: url("../assets/icons_tag.png");
             position: absolute;
             bottom: 15%;
             right: 5%; }
@@ -257,7 +257,7 @@ table {
     width: 24px;
     height: 24px;
     background: #000;
-    background-image: url("/assets/btn_goTop.png");
+    background-image: url("../assets/btn_goTop.png");
     display: inline-block;
     position: fixed;
     right: 14.5%;
