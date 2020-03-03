@@ -26,8 +26,7 @@
   }
 
   .topBg {
-    // background-image: url("/assets/Hero.png");
-    background-image: url("{{ '/assets/Hero.png' | prepend: site.baseurl }}");
+    background-image: url("../assets/Hero.png");
     width: 1024px;
     height: 380px;
     background-position: center center;
